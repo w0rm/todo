@@ -1,0 +1,8 @@
+*.sublime-project
+*.sublime-project
+*.pyc
+._*
+*~
+*.pyc
+siteconfig.py
+db.sqlite
