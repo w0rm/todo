@@ -1,5 +1,5 @@
 *.sublime-project
-*.sublime-project
+*.sublime-workspace
 *.pyc
 ._*
 *~
