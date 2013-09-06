@@ -1,10 +1,15 @@
+import os
 from fabric.api import task, local
 from code import db
 
 
 @task
 def setup():
-    '''Inits database schema'''
+    '''Recreates database schema'''
+    try:
+        os.remove('db.sqlite')
+    except OSError:
+        pass
     schema_commands = open('schema.sql', 'r').read().split(';')
     for cmd in schema_commands:
         if cmd.strip():

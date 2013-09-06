@@ -10,7 +10,7 @@ template_globals = {'config': config, 'ctx': web.ctx}
 
 
 class template_global(object):
-    '''Decorator to register func to use in templates'''
+    '''Decorator to register func for use in templates'''
 
     def __init__(self, f):
         self.f = template_globals[f.__name__] = f
