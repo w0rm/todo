@@ -20,9 +20,8 @@ class NotFoundError(web.HTTPError):
 
     headers = {'Content-Type': 'application/json'}
 
-    def __init__(self, note, headers=None):
-        status = '400 Not Found'
-        note = note or 'Not Found'
+    def __init__(self, note='Not Found', headers=None):
+        status = '404 Not Found'
         message = json.dumps([{'note': note}])
         web.HTTPError.__init__(self, status, headers or self.headers,
                                unicode(message))

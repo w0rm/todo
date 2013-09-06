@@ -95,3 +95,10 @@ class TestApi():
         # Ensure deleted todo is not present in list
         todos = self.b.json_data
         assert_equals(any(t['id'] == todo['id'] for t in todos), False)
+
+    def test_get_inexistent_todo(self):
+        todo_id = 123456
+        # Ensure it doesn't exist
+        self.b.open('/api/todos/%d' % todo_id, method='DELETE')
+        result = self.b.open('/api/todos/%d' % todo_id)
+        assert_equals(self.b.status, 404)

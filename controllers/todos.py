@@ -43,7 +43,7 @@ class Todos(JSONController):
             return todo
 
     def delete(self, todo_id):
-        '''Delete todo by id'''
+        '''Delete todo by id and return deleted todo'''
         todo = self.get(todo_id)
         web.ctx.db.delete('todos', where='id = $todo_id', vars=locals())
-        return {}
+        return todo
