@@ -3,6 +3,8 @@ todo
 
 Attempt to build RESTful api with webpy
 
+[![Build Status](https://api.travis-ci.org/w0rm/todo.png)](https://travis-ci.org/w0rm/todo)
+
 ## Setup
 
 1. `pip install -r requirements.txt` to install required modules
