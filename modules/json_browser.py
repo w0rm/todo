@@ -1,3 +1,4 @@
+# coding: utf-8
 import web
 import json
 import urllib
@@ -13,7 +14,7 @@ class JSONAppBrowser(web.browser.AppBrowser):
         headers = headers or self.headers
         url = urllib.basejoin(self.url, url)
         req = urllib2.Request(url, json.dumps(data), headers)
-        req.get_method = lambda: method
+        req.get_method = lambda: method  # Trick to set request method
         return self.do_request(req)
 
     @property

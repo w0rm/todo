@@ -4,15 +4,15 @@ This is the main executable file
 that runs application in development server or wsgi mode
 '''
 
-# Add current directory to path
+
 import os
 import sys
-sys.path.append(os.path.abspath(os.path.dirname(__file__)))
-
 import web
 from config import config
 from urls import urls
 
+# Add current directory to path
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 # App initialization
 app = web.application(urls, globals())
