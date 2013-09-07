@@ -1,9 +1,7 @@
 # coding: utf-8
 
 import os
-import web
-import nose
-from nose.tools import assert_in, assert_not_in, assert_equals
+from nose.tools import assert_equals
 from modules.json_browser import JSONAppBrowser
 
 # Swtich into a testing environment
@@ -95,5 +93,5 @@ class TestApi():
         todo_id = 123456
         # Ensure it doesn't exist
         self.b.json_open('/api/todos/%d' % todo_id, method='DELETE')
-        result = self.b.json_open('/api/todos/%d' % todo_id)
+        self.b.json_open('/api/todos/%d' % todo_id)
         assert_equals(self.b.status, 404)

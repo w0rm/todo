@@ -1,3 +1,4 @@
 web.py
 fabric
 nose
+flake8

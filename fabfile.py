@@ -18,7 +18,8 @@ def setup():
 
 @task
 def server(port='8080'):
-    '''Runs server'''
+    '''Runs server on specified port'''
+    port = os.environ.get('PORT', port)
     local('python code.py %s' % port)
 
 
@@ -26,3 +27,9 @@ def server(port='8080'):
 def test():
     '''Runs tests'''
     local('nosetests')
+
+
+@task
+def lint():
+    '''Runs flakes8 lint'''
+    local('flake8 . --exclude venv')
