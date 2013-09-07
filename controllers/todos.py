@@ -9,7 +9,11 @@ class Todos(JSONController):
 
     Form = JSONForm(
         BooleanInput('is_done'),
-        StringInput('content'),
+        StringInput(
+            'content',
+            web.form.Validator('Content length must be greater than 7',
+                               lambda s: len(s) > 7)
+        ),
     )
 
     def list(self):

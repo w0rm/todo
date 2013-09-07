@@ -1,4 +1,4 @@
-
+# coding: utf-8
 import os
 import web
 import urllib
@@ -57,6 +57,18 @@ class TestApi():
         self.b.open('/api/todos/%(id)d' % todo)
         todo2 = self.b.json_data
         assert_equals(todo2['content'], 'Test TODO')
+
+    def test_validation_on_create(self):
+         # Try to create todo
+        self.b.open(
+            '/api/todos',
+            data='{"content": "Small"}',
+            method='POST'
+        )
+        assert_equals(self.b.status, 400)
+        error = self.b.json_data[0]
+        assert_equals(error['name'], 'content')
+        assert_equals(error['note'], 'Content length must be greater than 7')
 
     def test_create_and_update_todo(self):
         # Create todo
