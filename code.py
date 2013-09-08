@@ -10,6 +10,7 @@ import sys
 import web
 from config import config
 from urls import urls
+from template import render
 
 # Add current directory to path
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
@@ -36,11 +37,13 @@ def ctx_hook():
 
 app.add_processor(web.loadhook(ctx_hook))
 
+app.notfound = lambda: web.notfound(render.error(404, 'Not Found'))
+
 # Custom error pages in production
 if config.environment == 'production':
-    import template
-    app.internalerror = lambda: web.internalerror(template.render.error(500))
-    app.notfound = lambda: web.notfound(template.render.error(404))
+    app.internalerror = lambda: web.internalerror(
+        render.error(500, 'Internal Server Error'))
+
 
 if __name__ == '__main__':
     if config.environment != 'test':
