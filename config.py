@@ -7,7 +7,9 @@ and define your overrides in "config" dictionary
 
 import os
 import web
+import urlparse
 
+# Default config
 config = web.storage(
     environment='development',
     asset_version='v00',
@@ -20,6 +22,23 @@ try:
 except ImportError:
     pass
 
+# Update database from os.environ
+if 'DATABASE_URL' in os.environ:
+    url = urlparse.urlparse(os.environ['DATABASE_URL'])
+    config.database = dict(
+        dbn=url.scheme,
+        user=url.username,
+        db=url.path[1:],
+        password=url.password,
+        host=url.hostname,
+        port=url.port,
+    )
+
+# Update environment from os.environ
+if 'WEBPY_ENV' in os.environ:
+    config.environment = os.environ['WEBPY_ENV']
+
+
 # Set directories
 config.rootdir = os.path.abspath(os.path.dirname(__file__))
 config.update(
@@ -27,10 +46,6 @@ config.update(
     template_dir=config.get('templates_dir', config.rootdir + '/templates'),
 )
 
-
-# Update config based on current environment
-if os.environ.get('WEBPY_ENV') == 'test':
-    config.environment = 'test'
 
 if config.environment == 'test':
     web.config.debug = False
