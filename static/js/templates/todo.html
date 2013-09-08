@@ -1,0 +1,14 @@
+<div class="todo-view">
+    <input type="checkbox" name="is_done" id="todo-<%-todo.get('id')%>"
+           <% if (todo.get('is_done')) { %>checked<% } %> >
+    <label for="todo-<%-todo.get('id')%>"><%- todo.get('content') %></label>
+    (<a href="#" class="js-edit">edit</a>,
+     <a href="#" class="js-remove">del</a>)
+</div>
+<form class="todo-edit js-edit-form">
+    <input class="todo-content" autocomplete="off"
+           type="text" name="content"
+           value="<%- todo.get('content') %>">
+    <button type="submit">save</button> or <a href="#" class="js-cancel">cancel</a>
+    <small class="is-hidden todo-error js-edit-error"></small>
+</form>
