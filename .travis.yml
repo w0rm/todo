@@ -9,3 +9,13 @@ install:
 script:
   - "fab lint"
   - "fab test"
+# heroku deployment
+deploy:
+  run:
+    - "fab setup"
+  provider: heroku
+  api_key:
+    secure: HhPDZClTOyytpeAcDa5e7eZKbYXmoRJHzPaOjGL0zIkwW1paavCAg4YCgTlpYoEew5VkEA3608jaza9exlnZ6mJ9SWIg63Fbtecw3thJ+I/CLw16H24lz9438ulXAa30jkR4CBJ5cX7CDzwVzd4QRiQ68Vd7WLFsnDOAOKLOKDY=
+  app: restfultodo
+  on:
+    repo: w0rm/todo
