@@ -3,5 +3,5 @@ from template import render
 
 class Index:
 
-    def GET(self, path=None):
+    def GET(self):
         return render.index()
