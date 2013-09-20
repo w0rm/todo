@@ -37,7 +37,7 @@ class Todos(JSONController):
             return self.get(todo_id)
 
     def update(self, todo_id):
-        '''Update todo by id and redirect to its url'''
+        '''Update todo by id and return it'''
         form = self.Form()
         if form.validates():
             todo = self.get(todo_id)
